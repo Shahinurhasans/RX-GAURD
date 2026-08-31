@@ -1,0 +1,17 @@
+{
+  "name": "rxguard-backend",
+  "version": "1.0.0",
+  "description": "Rx-Guard API gateway between the pharmacy/prescriber front-end and the Fabric network",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "@hyperledger/fabric-gateway": "^1.5.1",
+    "@grpc/grpc-js": "^1.10.9",
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
