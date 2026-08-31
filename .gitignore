@@ -1,0 +1,8 @@
+node_modules/
+fabric-samples/
+.venv/
+__pycache__/
+*.pyc
+.env
+*.log
+install-fabric.sh
