@@ -1,0 +1,3074 @@
+[
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "skin_soft_tissue",
+    "drug": "gentamicin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "meropenem",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "tigecycline",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ceftriaxone",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "cefixime",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "ampicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "colistin",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "ciprofloxacin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "azithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "amoxicillin",
+    "aware_category": "ACCESS",
+    "appropriate": 1
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_complicated",
+    "drug": "nitrofurantoin",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "pneumonia_cap",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "uti_uncomplicated",
+    "drug": "linezolid",
+    "aware_category": "RESERVE",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "metronidazole",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "meningitis",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "neonatal_sepsis",
+    "drug": "doxycycline",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "gonorrhea",
+    "drug": "amoxicillin_clavulanate",
+    "aware_category": "ACCESS",
+    "appropriate": 0
+  },
+  {
+    "diagnosis": "typhoid",
+    "drug": "clarithromycin",
+    "aware_category": "WATCH",
+    "appropriate": 0
+  }
+]
