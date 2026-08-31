@@ -1,0 +1,21 @@
+{
+  "name": "rxguard-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Rx-Guard prescriber, pharmacist, and public verification UI",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0",
+    "qrcode.react": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.2"
+  }
+}
