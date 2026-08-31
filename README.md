@@ -1,0 +1,95 @@
+# Rx-Guard — Prototype
+
+Blockchain + AI antimicrobial stewardship platform for community pharmacies in
+Bangladesh. This repository is the BCOLBD 2026 Final Round prototype
+accompanying the Rx-Guard whitepaper.
+
+## What this prototype demonstrates
+
+The whitepaper describes a national-scale Hyperledger Fabric consortium
+network with seven categories of anchor node (DGDA, BMDC, ICDDR,B, hospital
+chains, pharmacy federations, academia, donors — whitepaper §7.3) plus a
+public EVM mirror chain for citizen verification. This prototype demonstrates
+the **verification mechanism** the whitepaper depends on, at pilot scale, on
+the Hyperledger Fabric `test-network` (two peer organisations + one orderer +
+Fabric CA), which stands in for that seven-category anchor set. Every
+component maps directly onto a section of the whitepaper:
+
+| Component | Whitepaper section | What it does |
+|---|---|---|
+| `chaincode/rxguard` | §7.5.1–7.5.3 | Prescription issuance, dispensing verification, regulator aggregation, on a permissioned Fabric channel |
+| `ai-service/` | §7.6.1 | Trained appropriateness classifier (WHO AWaRe category + score) queried at the point of prescription |
+| `backend/` | §7.5 | Express API bridging the front-end to the Fabric Gateway and the AI service |
+| `frontend/` | §4.1–4.3 | Prescriber, pharmacist, public-verify, and regulator views |
+
+### On-chain vs off-chain (whitepaper §7.4)
+
+No patient name, NID, or diagnosis text is ever written to the chain. The
+front-end only ever sends a `patientHash` computed by the issuing facility;
+the chaincode stores the hash, drug code, dose, duration, AWaRe category, AI
+appropriateness score, and model version hash — matching whitepaper Table 7.4
+exactly.
+
+## Repository layout
+
+```
+chaincode/rxguard/   Fabric contract (fabric-contract-api, Node.js)
+ai-service/          Appropriateness classifier: train.py, service.py (FastAPI)
+backend/             Express API + Fabric Gateway client
+frontend/             React app (Vite): prescriber / pharmacist / public-verify / regulator
+scripts/             Network bring-up and deployment helper scripts
+docs/                Architecture notes, sequence diagrams
+fabric-samples/      Hyperledger Fabric test-network (not our code; gitignored)
+```
+
+## Running the prototype end-to-end
+
+Prerequisites: Docker (Linux containers — on Windows this must run inside
+WSL2, see `docs/WINDOWS_SETUP.md`), Node.js 18+, Python 3.10+.
+
+```bash
+# 1. Bring up the Fabric test network, create the channel, deploy chaincode
+./scripts/network-up.sh
+
+# 2. Train (or retrain) the AI appropriateness model and start the service
+cd ai-service
+python -m venv .venv && .venv/bin/pip install -r requirements.txt
+python generate_data.py && python train.py
+uvicorn service:app --port 8001 &
+
+# 3. Start the backend API (talks to Fabric + the AI service)
+cd ../backend
+npm install
+npm start   # http://localhost:4000
+
+# 4. Start the front-end
+cd ../frontend
+npm install
+npm run dev   # http://localhost:5173
+```
+
+Then open `http://localhost:5173/prescriber`, issue a prescription, copy the
+prescription ID (or scan the QR), and use `/pharmacist` to verify and dispense
+it, `/verify` for the patient-facing check, and `/regulator` to see the
+aggregated dispensing view.
+
+## Known scope reductions vs. the whitepaper (documented deliberately)
+
+- **Two orgs, not seven.** The pilot network's `Org1MSP`/`Org2MSP` each carry
+  multiple whitepaper-defined roles (see comment in
+  `chaincode/rxguard/lib/rxGuardContract.js`) so the demo runs on Fabric's
+  stock two-org test-network. Production onboarding maps roles to BMDC/DGDA
+  issued certificate attributes instead of org membership.
+- **Signatures are placeholders.** `prescriberSignature` / `pharmacistSignature`
+  fields are populated with a deterministic string, not a real detached
+  ECDSA signature from a mobile-held key, for time reasons — the chaincode's
+  authorization (§8.2 permission structure) is enforced via MSP identity on
+  the mutual-TLS gRPC connection, which is the same underlying primitive.
+- **No public EVM mirror chain.** `/verify` queries the Fabric network
+  directly rather than through a Polygon mirror with a merkle proof (§7.2);
+  the response shape (boolean + category only) mimics what the mirror would
+  expose.
+- **AI model is a small decision tree over a synthetic dataset**, not the
+  transformer described in §7.6.1 — see `ai-service/README.md` for what a
+  production version would require (ICDDR,B-labelled data, model registry,
+  federated aggregation per §7.7).
