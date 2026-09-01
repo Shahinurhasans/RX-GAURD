@@ -3,7 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const { connectAs } = require('./fabric/connect');
-const { slugify, issueToken, requireRole, findByEmail, insert, bcrypt } = require('./auth');
+const { slugify, issueToken, requireRole, findByEmail, insert, listByRole, bcrypt } = require('./auth');
 
 const app = express();
 app.use(cors());
@@ -66,6 +66,23 @@ app.post('/api/auth/register/pharmacy', (req, res) => {
         entityId: pharmacyId, pharmacyId, name, licenseNumber
     });
     res.json({ token: issueToken(user), role: 'pharmacy', entityId: pharmacyId, name });
+});
+
+app.post('/api/auth/register/regulator', (req, res) => {
+    const { name, email, password, agency } = req.body;
+    if (!name || !email || !password || !agency) {
+        return res.status(400).json({ error: 'name, email, password, and agency are required' });
+    }
+    if (findByEmail(email)) {
+        return res.status(409).json({ error: 'An account with this email already exists' });
+    }
+
+    const regulatorId = slugify('regulator', name);
+    const user = insert({
+        role: 'regulator', email, passwordHash: bcrypt.hashSync(password, 10),
+        entityId: regulatorId, name, agency
+    });
+    res.json({ token: issueToken(user), role: 'regulator', entityId: regulatorId, name });
 });
 
 app.post('/api/auth/login', (req, res) => {
@@ -169,14 +186,88 @@ app.get('/api/prescriptions/:id/history', async (req, res) => {
     }
 });
 
+// --- Pharmacy inventory (leakage / no-prescription-sale detection) --------
+//
+// RecordStockReceipt logs what came in; every on-chain dispense auto-decrements
+// the expected count (see chaincode DispensePrescription); ReportStockAudit
+// logs what a physical count actually found. A positive discrepancy means
+// more left the shelf than the chain can account for.
+
+app.post('/api/pharmacy/stock/receipt', requireRole('pharmacy'), async (req, res) => {
+    const { drugCode, quantity } = req.body;
+    let conn;
+    try {
+        conn = await connectAs('org2');
+        const result = await conn.contract.submitTransaction(
+            'RecordStockReceipt', req.user.pharmacyId, drugCode, String(quantity)
+        );
+        res.json(decodeResult(result));
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    } finally {
+        conn?.close();
+    }
+});
+
+app.post('/api/pharmacy/stock/audit', requireRole('pharmacy'), async (req, res) => {
+    const { drugCode, physicalCount } = req.body;
+    let conn;
+    try {
+        conn = await connectAs('org2');
+        const result = await conn.contract.submitTransaction(
+            'ReportStockAudit', req.user.pharmacyId, drugCode, String(physicalCount)
+        );
+        res.json(decodeResult(result));
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    } finally {
+        conn?.close();
+    }
+});
+
+app.get('/api/pharmacy/stock', requireRole('pharmacy'), async (req, res) => {
+    let conn;
+    try {
+        conn = await connectAs('org2');
+        const result = await conn.contract.evaluateTransaction(
+            'GetStockStatusForPharmacy', req.user.pharmacyId
+        );
+        res.json(decodeResult(result));
+    } catch (err) {
+        res.status(404).json({ error: err.message });
+    } finally {
+        conn?.close();
+    }
+});
+
 // --- Regulator aggregation (whitepaper 7.5.3) ------------------------------
 
-app.get('/api/regulator/pharmacies/:pharmacyId/dispensing', async (req, res) => {
+app.get('/api/regulator/pharmacies', requireRole('regulator'), (_req, res) => {
+    const pharmacies = listByRole('pharmacy').map((p) => ({ pharmacyId: p.pharmacyId, name: p.name }));
+    res.json(pharmacies);
+});
+
+app.get('/api/regulator/pharmacies/:pharmacyId/dispensing', requireRole('regulator'), async (req, res) => {
     let conn;
     try {
         conn = await connectAs('org1');
         const result = await conn.contract.evaluateTransaction(
             'GetDispensingEventsForPharmacy', req.params.pharmacyId
+        );
+        res.json(decodeResult(result));
+    } catch (err) {
+        res.status(404).json({ error: err.message });
+    } finally {
+        conn?.close();
+    }
+});
+
+app.get('/api/regulator/pharmacies/:pharmacyId/stock', requireRole('regulator'), async (req, res) => {
+    let conn;
+    try {
+        conn = await connectAs('org1');
+        const result = await conn.contract.evaluateTransaction(
+            'GetStockStatusForPharmacy', req.params.pharmacyId
         );
         res.json(decodeResult(result));
     } catch (err) {

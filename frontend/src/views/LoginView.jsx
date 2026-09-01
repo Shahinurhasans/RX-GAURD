@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { api } from '../api.js';
 import { setSession } from '../auth.js';
 
+function roleHome(role) {
+  if (role === 'doctor') return '/prescriber';
+  if (role === 'pharmacy') return '/pharmacist';
+  return '/regulator';
+}
+
 export default function LoginView() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState(null);
@@ -18,7 +24,7 @@ export default function LoginView() {
     try {
       const res = await api.login(form);
       setSession(res);
-      navigate(res.role === 'doctor' ? '/prescriber' : '/pharmacist');
+      navigate(roleHome(res.role));
     } catch (err) {
       setError(err.message);
     } finally {
@@ -45,8 +51,9 @@ export default function LoginView() {
 
       <p className="hint">
         New here?{' '}
-        <a href="/register/doctor">Register as a doctor</a> or{' '}
-        <a href="/register/pharmacy">register a pharmacy</a>.
+        <a href="/register/doctor">Register as a doctor</a>,{' '}
+        <a href="/register/pharmacy">register a pharmacy</a>, or{' '}
+        <a href="/register/regulator">register as a regulator</a>.
       </p>
     </section>
   );

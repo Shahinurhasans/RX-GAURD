@@ -22,6 +22,9 @@ export const api = {
   registerPharmacy: (data) =>
     request('/api/auth/register/pharmacy', { method: 'POST', body: JSON.stringify(data) }),
 
+  registerRegulator: (data) =>
+    request('/api/auth/register/regulator', { method: 'POST', body: JSON.stringify(data) }),
+
   login: (data) =>
     request('/api/auth/login', { method: 'POST', body: JSON.stringify(data) }),
 
@@ -37,6 +40,21 @@ export const api = {
   getHistory: (id) =>
     request(`/api/prescriptions/${id}/history`),
 
+  recordStockReceipt: (data) =>
+    request('/api/pharmacy/stock/receipt', { method: 'POST', body: JSON.stringify(data) }),
+
+  reportStockAudit: (data) =>
+    request('/api/pharmacy/stock/audit', { method: 'POST', body: JSON.stringify(data) }),
+
+  getOwnStock: () =>
+    request('/api/pharmacy/stock'),
+
+  getPharmacies: () =>
+    request('/api/regulator/pharmacies'),
+
   getPharmacyDispensing: (pharmacyId) =>
-    request(`/api/regulator/pharmacies/${pharmacyId}/dispensing`)
+    request(`/api/regulator/pharmacies/${pharmacyId}/dispensing`),
+
+  getPharmacyStock: (pharmacyId) =>
+    request(`/api/regulator/pharmacies/${pharmacyId}/stock`)
 };

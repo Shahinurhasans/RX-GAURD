@@ -6,7 +6,15 @@ import RegulatorView from './views/RegulatorView.jsx';
 import LoginView from './views/LoginView.jsx';
 import RegisterDoctorView from './views/RegisterDoctorView.jsx';
 import RegisterPharmacyView from './views/RegisterPharmacyView.jsx';
+import RegisterRegulatorView from './views/RegisterRegulatorView.jsx';
 import { getSession, clearSession } from './auth.js';
+
+function roleHome(role) {
+  if (role === 'doctor') return '/prescriber';
+  if (role === 'pharmacy') return '/pharmacist';
+  if (role === 'regulator') return '/regulator';
+  return '/login';
+}
 
 function RequireRole({ role, children }) {
   const session = getSession();
@@ -33,7 +41,7 @@ export default function App() {
           {session?.role === 'doctor' && <NavLink to="/prescriber" className={navClass}>Prescriber</NavLink>}
           {session?.role === 'pharmacy' && <NavLink to="/pharmacist" className={navClass}>Pharmacist</NavLink>}
           <NavLink to="/verify" className={navClass}>Public Verify</NavLink>
-          <NavLink to="/regulator" className={navClass}>Regulator</NavLink>
+          {session?.role === 'regulator' && <NavLink to="/regulator" className={navClass}>Regulator</NavLink>}
         </nav>
         <div className="session">
           {session ? (
@@ -48,22 +56,15 @@ export default function App() {
       </header>
       <main>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Navigate
-                to={session ? (session.role === 'doctor' ? '/prescriber' : '/pharmacist') : '/login'}
-                replace
-              />
-            }
-          />
+          <Route path="/" element={<Navigate to={roleHome(session?.role)} replace />} />
           <Route path="/login" element={<LoginView />} />
           <Route path="/register/doctor" element={<RegisterDoctorView />} />
           <Route path="/register/pharmacy" element={<RegisterPharmacyView />} />
+          <Route path="/register/regulator" element={<RegisterRegulatorView />} />
           <Route path="/prescriber" element={<RequireRole role="doctor"><PrescriberView /></RequireRole>} />
           <Route path="/pharmacist" element={<RequireRole role="pharmacy"><PharmacistView /></RequireRole>} />
           <Route path="/verify" element={<PublicVerifyView />} />
-          <Route path="/regulator" element={<RegulatorView />} />
+          <Route path="/regulator" element={<RequireRole role="regulator"><RegulatorView /></RequireRole>} />
         </Routes>
       </main>
     </div>

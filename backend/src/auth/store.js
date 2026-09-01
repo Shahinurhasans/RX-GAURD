@@ -27,4 +27,8 @@ function insert(user) {
     return user;
 }
 
-module.exports = { findByEmail, insert };
+function listByRole(role) {
+    return load().filter((u) => u.role === role);
+}
+
+module.exports = { findByEmail, insert, listByRole };

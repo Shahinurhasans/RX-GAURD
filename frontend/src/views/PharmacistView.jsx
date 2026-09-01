@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { api } from '../api.js';
 import { getSession } from '../auth.js';
+import { DRUGS } from '../constants.js';
 
 export default function PharmacistView() {
   const session = getSession();
@@ -9,6 +10,22 @@ export default function PharmacistView() {
   const [dispensed, setDispensed] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const [stock, setStock] = useState([]);
+  const [stockForm, setStockForm] = useState({ drugCode: DRUGS[0], quantity: 100 });
+  const [auditForm, setAuditForm] = useState({ drugCode: DRUGS[0], physicalCount: 0 });
+  const [stockError, setStockError] = useState(null);
+  const [stockLoading, setStockLoading] = useState(false);
+
+  async function loadStock() {
+    try {
+      setStock(await api.getOwnStock());
+    } catch (err) {
+      setStockError(err.message);
+    }
+  }
+
+  useEffect(() => { loadStock(); }, []);
 
   async function handleVerify(e) {
     e.preventDefault();
@@ -35,10 +52,39 @@ export default function PharmacistView() {
       });
       setDispensed(res);
       setVerified({ ...verified, status: res.status, valid: false });
+      loadStock();
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleReceipt(e) {
+    e.preventDefault();
+    setStockError(null);
+    setStockLoading(true);
+    try {
+      await api.recordStockReceipt(stockForm);
+      await loadStock();
+    } catch (err) {
+      setStockError(err.message);
+    } finally {
+      setStockLoading(false);
+    }
+  }
+
+  async function handleAudit(e) {
+    e.preventDefault();
+    setStockError(null);
+    setStockLoading(true);
+    try {
+      await api.reportStockAudit(auditForm);
+      await loadStock();
+    } catch (err) {
+      setStockError(err.message);
+    } finally {
+      setStockLoading(false);
     }
   }
 
@@ -88,6 +134,79 @@ export default function PharmacistView() {
           <p>Prescription is now <strong>{dispensed.status}</strong> and cannot be reused.</p>
         </div>
       )}
+
+      <h2>Inventory</h2>
+      <p className="hint">
+        Every on-chain dispense auto-decrements expected stock. Log what comes in
+        and what a physical shelf count actually finds &mdash; a shortfall against
+        what the chain can account for is what the regulator dashboard flags as
+        possible sales made without a prescription.
+      </p>
+
+      <div className="card">
+        <form onSubmit={handleReceipt} style={{ display: 'flex', gap: 12, alignItems: 'flex-end', flexWrap: 'wrap' }}>
+          <label style={{ flex: 1, minWidth: 160 }}>
+            Drug received
+            <select
+              value={stockForm.drugCode}
+              onChange={(e) => setStockForm({ ...stockForm, drugCode: e.target.value })}
+            >
+              {DRUGS.map((d) => <option key={d} value={d}>{d.replaceAll('_', ' ')}</option>)}
+            </select>
+          </label>
+          <label style={{ width: 120 }}>
+            Quantity
+            <input
+              type="number" min="1" value={stockForm.quantity}
+              onChange={(e) => setStockForm({ ...stockForm, quantity: e.target.value })}
+            />
+          </label>
+          <button type="submit" disabled={stockLoading}>Record receipt</button>
+        </form>
+
+        <form onSubmit={handleAudit} style={{ display: 'flex', gap: 12, alignItems: 'flex-end', flexWrap: 'wrap' }}>
+          <label style={{ flex: 1, minWidth: 160 }}>
+            Drug audited
+            <select
+              value={auditForm.drugCode}
+              onChange={(e) => setAuditForm({ ...auditForm, drugCode: e.target.value })}
+            >
+              {DRUGS.map((d) => <option key={d} value={d}>{d.replaceAll('_', ' ')}</option>)}
+            </select>
+          </label>
+          <label style={{ width: 120 }}>
+            Physical count
+            <input
+              type="number" min="0" value={auditForm.physicalCount}
+              onChange={(e) => setAuditForm({ ...auditForm, physicalCount: e.target.value })}
+            />
+          </label>
+          <button type="submit" disabled={stockLoading}>Report physical count</button>
+        </form>
+
+        {stockError && <div className="error">{stockError}</div>}
+
+        <table>
+          <thead>
+            <tr><th>Drug</th><th>Received</th><th>Dispensed</th><th>Expected</th><th>Last count</th><th>Discrepancy</th></tr>
+          </thead>
+          <tbody>
+            {stock.map((s) => (
+              <tr key={s.drugCode}>
+                <td>{s.drugCode.replaceAll('_', ' ')}</td>
+                <td>{s.totalReceived}</td>
+                <td>{s.totalDispensed}</td>
+                <td>{s.expectedStock}</td>
+                <td>{s.lastReportedPhysical ?? '—'}</td>
+                <td>{s.discrepancy > 0 ? <strong>{s.discrepancy}</strong> : (s.discrepancy ?? '—')}</td>
+              </tr>
+            ))}
+            {stock.length === 0 && (
+              <tr><td colSpan={6}>No stock recorded yet.</td></tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 }

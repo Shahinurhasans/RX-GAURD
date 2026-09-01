@@ -180,7 +180,87 @@ class RxGuardContract extends Contract {
             prescriptionId, pharmacyId, drugCode: dispensedDrugCode
         })));
 
+        // Every on-chain fill draws down the pharmacy's expected stock, so a
+        // later physical audit (ReportStockAudit) can reveal drugs that left
+        // without a matching prescription.
+        const stock = await this._getOrInitStock(ctx, pharmacyId, dispensedDrugCode);
+        stock.totalDispensed += 1;
+        stock.expectedStock -= 1;
+        await ctx.stub.putState(
+            ctx.stub.createCompositeKey('STOCK', [pharmacyId, dispensedDrugCode]),
+            Buffer.from(JSON.stringify(stock))
+        );
+
         return JSON.stringify(prescription);
+    }
+
+    // --- Inventory tracking (leakage / no-prescription-sale detection) --------
+    //
+    // A pharmacy's dispensed-via-chain count should track its physical stock
+    // drawdown. RecordStockReceipt logs what came in; DispensePrescription
+    // (below) auto-decrements the expected count for every on-chain fill;
+    // ReportStockAudit lets the pharmacy (or an inspector) log a physical
+    // count. A positive discrepancy (expected > physically counted) means
+    // more of a drug left the shelf than the chain can account for -- the
+    // signal of sales made without an on-chain prescription.
+
+    async RecordStockReceipt(ctx, pharmacyId, drugCode, quantity) {
+        this._requireRole(ctx, ['pharmacist']);
+        const qty = Number(quantity);
+        if (!Number.isFinite(qty) || qty <= 0) {
+            throw new Error('quantity must be a positive number');
+        }
+
+        const stock = await this._getOrInitStock(ctx, pharmacyId, drugCode);
+        stock.totalReceived += qty;
+        stock.expectedStock += qty;
+        stock.lastRestockAt = ctx.stub.getTxTimestamp().seconds.low;
+
+        await ctx.stub.putState(
+            ctx.stub.createCompositeKey('STOCK', [pharmacyId, drugCode]),
+            Buffer.from(JSON.stringify(stock))
+        );
+        return JSON.stringify(stock);
+    }
+
+    async ReportStockAudit(ctx, pharmacyId, drugCode, physicalCount) {
+        this._requireRole(ctx, ['pharmacist']);
+        const count = Number(physicalCount);
+        if (!Number.isFinite(count) || count < 0) {
+            throw new Error('physicalCount must be a non-negative number');
+        }
+
+        const stock = await this._getOrInitStock(ctx, pharmacyId, drugCode);
+        stock.lastReportedPhysical = count;
+        stock.lastAuditAt = ctx.stub.getTxTimestamp().seconds.low;
+        stock.discrepancy = stock.expectedStock - count;
+
+        await ctx.stub.putState(
+            ctx.stub.createCompositeKey('STOCK', [pharmacyId, drugCode]),
+            Buffer.from(JSON.stringify(stock))
+        );
+
+        if (stock.discrepancy > 0) {
+            ctx.stub.setEvent('StockDiscrepancyDetected', Buffer.from(JSON.stringify({
+                pharmacyId, drugCode, discrepancy: stock.discrepancy
+            })));
+        }
+        return JSON.stringify(stock);
+    }
+
+    async GetStockStatusForPharmacy(ctx, pharmacyId) {
+        this._requireRole(ctx, ['pharmacist', 'regulator', 'professionalBody']);
+        const iterator = await ctx.stub.getStateByPartialCompositeKey('STOCK', [pharmacyId]);
+        const results = [];
+        let res = await iterator.next();
+        while (!res.done) {
+            if (res.value && res.value.value.length > 0) {
+                results.push(JSON.parse(res.value.value.toString('utf8')));
+            }
+            res = await iterator.next();
+        }
+        await iterator.close();
+        return JSON.stringify(results);
     }
 
     // --- Regulator aggregation / anomaly support (whitepaper 7.5.3) -----------
@@ -231,6 +311,26 @@ class RxGuardContract extends Contract {
     async _assetExists(ctx, key) {
         const raw = await ctx.stub.getState(key);
         return raw && raw.length > 0;
+    }
+
+    async _getOrInitStock(ctx, pharmacyId, drugCode) {
+        const key = ctx.stub.createCompositeKey('STOCK', [pharmacyId, drugCode]);
+        const raw = await ctx.stub.getState(key);
+        if (raw && raw.length > 0) {
+            return JSON.parse(raw.toString());
+        }
+        return {
+            docType: 'stock',
+            pharmacyId,
+            drugCode,
+            totalReceived: 0,
+            totalDispensed: 0,
+            expectedStock: 0,
+            lastReportedPhysical: null,
+            lastAuditAt: null,
+            lastRestockAt: null,
+            discrepancy: null
+        };
     }
 
     // Role check based on client MSP identity. The two-org Fabric test-network

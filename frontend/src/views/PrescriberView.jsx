@@ -2,18 +2,7 @@ import { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { api } from '../api.js';
 import { getSession } from '../auth.js';
-
-const DIAGNOSES = [
-  'uti_uncomplicated', 'uti_complicated', 'typhoid', 'neonatal_sepsis',
-  'pneumonia_cap', 'skin_soft_tissue', 'gonorrhea', 'meningitis'
-];
-
-const DRUGS = [
-  'amoxicillin', 'nitrofurantoin', 'doxycycline', 'metronidazole', 'gentamicin',
-  'amoxicillin_clavulanate', 'ampicillin', 'ciprofloxacin', 'azithromycin',
-  'ceftriaxone', 'cefixime', 'clarithromycin', 'meropenem', 'colistin',
-  'linezolid', 'tigecycline'
-];
+import { DIAGNOSES, DRUGS } from '../constants.js';
 
 function newId(prefix) {
   return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;

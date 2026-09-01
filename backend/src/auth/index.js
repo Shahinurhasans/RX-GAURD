@@ -2,7 +2,7 @@
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { findByEmail, insert } = require('./store');
+const { findByEmail, insert, listByRole } = require('./store');
 
 // Prototype-scope secret: a real deployment must supply JWT_SECRET via env.
 const JWT_SECRET = process.env.JWT_SECRET || 'rxguard-dev-secret-change-in-production';
@@ -39,4 +39,4 @@ function requireRole(role) {
     };
 }
 
-module.exports = { slugify, issueToken, requireRole, findByEmail, insert, bcrypt };
+module.exports = { slugify, issueToken, requireRole, findByEmail, insert, listByRole, bcrypt };

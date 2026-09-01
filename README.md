@@ -17,7 +17,7 @@ component maps directly onto a section of the whitepaper:
 
 | Component | Whitepaper section | What it does |
 |---|---|---|
-| `chaincode/rxguard` | §7.5.1–7.5.3 | Prescription issuance, dispensing verification, regulator aggregation, on a permissioned Fabric channel |
+| `chaincode/rxguard` | §7.5.1–7.5.3 | Prescription issuance, dispensing verification, stock reconciliation, regulator aggregation, on a permissioned Fabric channel |
 | `ai-service/` | §7.6.1 | Trained appropriateness classifier (WHO AWaRe category + score) queried at the point of prescription |
 | `backend/` | §7.5 | Express API bridging the front-end to the Fabric Gateway and the AI service |
 | `frontend/` | §4.1–4.3 | Prescriber, pharmacist, public-verify, and regulator views |
@@ -68,14 +68,21 @@ npm install
 npm run dev   # http://localhost:5173
 ```
 
-Then open `http://localhost:5173`, register a doctor account (this writes a
-prescriber record onto the ledger, whitepaper §7.5.1) or a pharmacy account,
-and log in. `/prescriber` and `/pharmacist` require the matching account type
-— prescriberId/pharmacyId/pharmacistId come from the logged-in session, not a
-free-text field, so a prescriber cannot dispense and a pharmacy cannot issue.
-Issue a prescription, copy the prescription ID (or scan the QR), and use
-`/pharmacist` to verify and dispense it, `/verify` for the patient-facing
-check, and `/regulator` to see the aggregated dispensing view.
+Then open `http://localhost:5173`, register a doctor, pharmacy, or regulator
+account (doctor registration writes a prescriber record onto the ledger,
+whitepaper §7.5.1) and log in. `/prescriber`, `/pharmacist`, and `/regulator`
+each require the matching account type — prescriberId/pharmacyId/pharmacistId
+come from the logged-in session, not a free-text field, so a prescriber
+cannot dispense and a pharmacy cannot issue. Issue a prescription, copy the
+prescription ID (or scan the QR), and use `/pharmacist` to verify and dispense
+it, `/verify` for the patient-facing check, and `/regulator` to see the
+aggregated dispensing and stock-discrepancy view.
+
+A pharmacy account can also log stock receipts and physical audit counts on
+`/pharmacist` — every on-chain dispense auto-decrements the pharmacy's
+expected stock, so a shortfall against what's physically counted flags
+possible sales made without a matching prescription (visible to regulators
+on `/regulator`).
 
 ## Known scope reductions vs. the whitepaper (documented deliberately)
 
@@ -84,14 +91,23 @@ check, and `/regulator` to see the aggregated dispensing view.
   `chaincode/rxguard/lib/rxGuardContract.js`) so the demo runs on Fabric's
   stock two-org test-network. Production onboarding maps roles to BMDC/DGDA
   issued certificate attributes instead of org membership.
-- **Pharmacy accounts are an off-chain directory, not a ledger record.** Doctor
-  accounts map 1:1 onto an on-chain `RegisterPrescriber` entry, so a revoked
-  prescriber loses issuance rights network-wide. Pharmacy accounts exist only
-  in the backend's local user store (`backend/data/users.json`) — the actual
-  dispensing authorization is enforced by Fabric organisation membership
-  (PharmacyOrgMSP), and this store just gives counter staff a login and ties
-  dispensing events to a stable pharmacy identity. A production version would
-  register pharmacies on-chain too, with per-pharmacist granularity.
+- **Pharmacy and regulator accounts are an off-chain directory, not a ledger
+  record.** Doctor accounts map 1:1 onto an on-chain `RegisterPrescriber`
+  entry, so a revoked prescriber loses issuance rights network-wide. Pharmacy
+  and regulator accounts exist only in the backend's local user store
+  (`backend/data/users.json`) — the actual dispensing/query authorization is
+  enforced by Fabric organisation membership (PharmacyOrgMSP / Org1MSP), and
+  this store just gives staff a login and ties actions to a stable identity.
+  A production version would register pharmacies and regulator staff on-chain
+  too, with per-pharmacist granularity.
+- **Stock discrepancy detection is a self-reported signal, not an audit
+  trail.** A pharmacy logs its own receipts and physical counts — nothing
+  stops a pharmacy from under-reporting a physical count discrepancy just as
+  easily as it could under-report on paper today. What the chain adds is that
+  the *expected* count (drawn down by every real prescription fill) can't be
+  faked, so a pharmacy that wants to hide leakage has to also fabricate a
+  matching physical count every audit, and every one of those audit
+  submissions is itself timestamped and immutable — unlike a paper ledger.
 - **Signatures are placeholders.** `prescriberSignature` / `pharmacistSignature`
   fields are populated with a deterministic string, not a real detached
   ECDSA signature from a mobile-held key, for time reasons — the chaincode's
