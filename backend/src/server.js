@@ -97,7 +97,7 @@ app.post('/api/auth/login', (req, res) => {
 // --- Prescription issuance (whitepaper 7.5.1) -----------------------------
 
 app.post('/api/prescriptions', requireRole('doctor'), async (req, res) => {
-    const { prescriptionId, patientHash, diagnosis, drugCode, dose, duration } = req.body;
+    const { prescriptionId, patientHash, diagnosis, drugCode, dose, duration, quantity } = req.body;
     const prescriberId = req.user.entityId;
 
     let conn;
@@ -124,6 +124,7 @@ app.post('/api/prescriptions', requireRole('doctor'), async (req, res) => {
             ai.aware_category,
             dose,
             duration,
+            String(quantity),
             String(ai.appropriateness_score),
             ai.model_version_hash,
             prescriberId,

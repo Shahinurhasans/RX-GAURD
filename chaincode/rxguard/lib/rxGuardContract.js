@@ -63,12 +63,17 @@ class RxGuardContract extends Contract {
     // --- Prescription issuance (whitepaper 7.5.1) -----------------------------
 
     async IssuePrescription(ctx, prescriptionId, patientHash, drugCode, awareCategory,
-        dose, duration, appropriatenessScore, modelVersionHash, prescriberId, prescriberSignature) {
+        dose, duration, quantity, appropriatenessScore, modelVersionHash, prescriberId, prescriberSignature) {
 
         this._requireRole(ctx, ['prescriber']);
 
         if (![AWARE_ACCESS, AWARE_WATCH, AWARE_RESERVE].includes(awareCategory)) {
             throw new Error(`Invalid AWaRe category: ${awareCategory}`);
+        }
+
+        const qty = Number(quantity);
+        if (!Number.isFinite(qty) || qty <= 0) {
+            throw new Error('quantity must be a positive number');
         }
 
         const prescriberKey = ctx.stub.createCompositeKey('PRESCRIBER', [prescriberId]);
@@ -100,6 +105,7 @@ class RxGuardContract extends Contract {
             awareCategory,
             dose,
             duration,
+            quantity: qty,
             appropriatenessScore: Number(appropriatenessScore),
             modelVersionHash,
             prescriberId,
@@ -136,6 +142,7 @@ class RxGuardContract extends Contract {
             awareCategory: prescription.awareCategory,
             dose: prescription.dose,
             duration: prescription.duration,
+            quantity: prescription.quantity,
             appropriatenessScore: prescription.appropriatenessScore,
             status: prescription.status,
             valid
@@ -173,19 +180,19 @@ class RxGuardContract extends Contract {
         const dispenseKey = ctx.stub.createCompositeKey('DISPENSE', [pharmacyId, String(weekBucket), prescriptionId]);
         await ctx.stub.putState(dispenseKey, Buffer.from(JSON.stringify({
             prescriptionId, pharmacyId, pharmacistId, drugCode: dispensedDrugCode,
-            awareCategory: prescription.awareCategory, filledAt: nowSeconds
+            quantity: prescription.quantity, awareCategory: prescription.awareCategory, filledAt: nowSeconds
         })));
 
         ctx.stub.setEvent('PrescriptionDispensed', Buffer.from(JSON.stringify({
-            prescriptionId, pharmacyId, drugCode: dispensedDrugCode
+            prescriptionId, pharmacyId, drugCode: dispensedDrugCode, quantity: prescription.quantity
         })));
 
-        // Every on-chain fill draws down the pharmacy's expected stock, so a
-        // later physical audit (ReportStockAudit) can reveal drugs that left
-        // without a matching prescription.
+        // Every on-chain fill draws down the pharmacy's expected stock by the
+        // prescribed quantity, so a later physical audit (ReportStockAudit)
+        // can reveal drugs that left without a matching prescription.
         const stock = await this._getOrInitStock(ctx, pharmacyId, dispensedDrugCode);
-        stock.totalDispensed += 1;
-        stock.expectedStock -= 1;
+        stock.totalDispensed += prescription.quantity;
+        stock.expectedStock -= prescription.quantity;
         await ctx.stub.putState(
             ctx.stub.createCompositeKey('STOCK', [pharmacyId, dispensedDrugCode]),
             Buffer.from(JSON.stringify(stock))
