@@ -12,6 +12,11 @@ const AWARE_ACCESS = 'ACCESS';
 const AWARE_WATCH = 'WATCH';
 const AWARE_RESERVE = 'RESERVE';
 
+// Below this, the AI appropriateness score is not a "consider an
+// alternative" suggestion any more -- issuance is refused outright and
+// the prescriber must choose a different drug (whitepaper 7.6.1).
+const MIN_APPROPRIATENESS_SCORE = 0.4;
+
 class RxGuardContract extends Contract {
 
     async InitLedger(ctx) {
@@ -85,6 +90,17 @@ class RxGuardContract extends Contract {
             throw new Error('quantity must be a positive number');
         }
 
+        const score = Number(appropriatenessScore);
+        if (!Number.isFinite(score) || score < 0 || score > 1) {
+            throw new Error('appropriatenessScore must be a number between 0 and 1');
+        }
+        if (score < MIN_APPROPRIATENESS_SCORE) {
+            throw new Error(
+                `Appropriateness score ${score} is below the minimum threshold (${MIN_APPROPRIATENESS_SCORE}); ` +
+                `an alternative drug must be prescribed instead`
+            );
+        }
+
         const prescriberKey = ctx.stub.createCompositeKey('PRESCRIBER', [prescriberId]);
         const prescriberRaw = await ctx.stub.getState(prescriberKey);
         if (!prescriberRaw || prescriberRaw.length === 0) {
@@ -115,7 +131,7 @@ class RxGuardContract extends Contract {
             dose,
             duration,
             quantity: qty,
-            appropriatenessScore: Number(appropriatenessScore),
+            appropriatenessScore: score,
             modelVersionHash,
             prescriberId,
             prescriberSignature,
@@ -130,11 +146,34 @@ class RxGuardContract extends Contract {
 
         await ctx.stub.putState(prescriptionId, Buffer.from(JSON.stringify(prescription)));
 
+        // Composite key so the regulator can range-query a prescriber's issuance
+        // history and spot a pattern of low-but-allowed appropriateness scores
+        // (whitepaper 7.5.1) -- distinct from the hard block above, this is for
+        // prescriptions that scraped past the minimum but are still worth a look.
+        const prescriberRxKey = ctx.stub.createCompositeKey('PRESCRIBER_RX', [prescriberId, prescriptionId]);
+        await ctx.stub.putState(prescriberRxKey, Buffer.from(JSON.stringify({
+            prescriptionId, drugCode, awareCategory, appropriatenessScore: score, issuedAt: txTimestamp
+        })));
+
         ctx.stub.setEvent('PrescriptionIssued', Buffer.from(JSON.stringify({
-            prescriptionId, drugCode, awareCategory, appropriatenessScore, prescriberId
+            prescriptionId, drugCode, awareCategory, appropriatenessScore: score, prescriberId
         })));
 
         return JSON.stringify(prescription);
+    }
+
+    async GetPrescriptionsForPrescriber(ctx, prescriberId) {
+        const iterator = await ctx.stub.getStateByPartialCompositeKey('PRESCRIBER_RX', [prescriberId]);
+        const results = [];
+        let res = await iterator.next();
+        while (!res.done) {
+            if (res.value && res.value.value.length > 0) {
+                results.push(JSON.parse(res.value.value.toString('utf8')));
+            }
+            res = await iterator.next();
+        }
+        await iterator.close();
+        return JSON.stringify(results);
     }
 
     // --- Dispensing verification (whitepaper 7.5.2) ---------------------------

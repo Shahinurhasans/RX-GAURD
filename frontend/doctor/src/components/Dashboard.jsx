@@ -18,6 +18,7 @@ export default function Dashboard({ session, onLogout }) {
   });
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  const [blocked, setBlocked] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const update = (field) => (e) => setForm({ ...form, [field]: e.target.value });
@@ -26,6 +27,7 @@ export default function Dashboard({ session, onLogout }) {
     e.preventDefault();
     setError(null);
     setResult(null);
+    setBlocked(null);
     setLoading(true);
     try {
       const prescriptionId = newId('rx');
@@ -41,7 +43,11 @@ export default function Dashboard({ session, onLogout }) {
       });
       setResult(res);
     } catch (err) {
-      setError(err.message);
+      if (err.blocked) {
+        setBlocked({ message: err.message, ai: err.ai });
+      } else {
+        setError(err.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -106,6 +112,18 @@ export default function Dashboard({ session, onLogout }) {
         </form>
 
         {error && <div className="error">{error}</div>}
+
+        {blocked && (
+          <div className="card">
+            <div className="badge warn">
+              Not permitted &mdash; appropriateness {Math.round(blocked.ai.appropriateness_score * 100)}%
+            </div>
+            <p>{blocked.message}</p>
+            {blocked.ai.alternative_drug && (
+              <p>Suggested alternative: <strong>{blocked.ai.alternative_drug.replaceAll('_', ' ')}</strong></p>
+            )}
+          </div>
+        )}
 
         {result && (
           <div className="card">

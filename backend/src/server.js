@@ -11,6 +11,19 @@ app.use(express.json());
 
 const AI_SERVICE_URL = process.env.AI_SERVICE_URL || 'http://127.0.0.1:8001';
 
+// Must match MIN_APPROPRIATENESS_SCORE in chaincode/rxguard/lib/rxGuardContract.js
+// -- checked here too so a blocked issuance fails fast (no wasted chain
+// transaction) and returns the AI's suggested alternative to the frontend.
+const MIN_APPROPRIATENESS_SCORE = 0.4;
+
+// Prescriptions that clear the hard MIN_APPROPRIATENESS_SCORE gate but still
+// score below this are "low but allowed" -- a prescriber issuing several of
+// these is worth a regulator's attention even though no single one broke a
+// rule. FLAG_AFTER_LOW_SCORES is how many trigger the flag shown on the
+// Prescribers tab.
+const LOW_SCORE_WARNING_THRESHOLD = 0.5;
+const FLAG_AFTER_LOW_SCORES = 3;
+
 function decodeResult(bytes) {
     const text = Buffer.from(bytes).toString('utf8');
     return text ? JSON.parse(text) : null;
@@ -124,6 +137,14 @@ app.post('/api/prescriptions', requireRole('doctor'), async (req, res) => {
             return res.status(400).json({ error: `AI scoring failed: ${detail}` });
         }
         const ai = await aiResponse.json();
+
+        if (ai.appropriateness_score < MIN_APPROPRIATENESS_SCORE) {
+            return res.status(400).json({
+                error: `AI appropriateness score ${Math.round(ai.appropriateness_score * 100)}% is below the minimum threshold (${MIN_APPROPRIATENESS_SCORE * 100}%) -- an alternative drug is required`,
+                blocked: true,
+                ai
+            });
+        }
 
         // 2. Commit the signed prescription + score to the Fabric ledger.
         conn = await connectAs('org1');
@@ -305,8 +326,21 @@ app.get('/api/regulator/prescribers', requireRole('regulator'), async (req, res)
             } catch {
                 active = null; // on-chain record missing/unreadable; surface as unknown rather than failing the list
             }
+
+            let prescriptionsIssued = 0;
+            let lowScoreCount = 0;
+            try {
+                const raw = await conn.contract.evaluateTransaction('GetPrescriptionsForPrescriber', d.entityId);
+                const issued = decodeResult(raw) || [];
+                prescriptionsIssued = issued.length;
+                lowScoreCount = issued.filter((p) => p.appropriatenessScore < LOW_SCORE_WARNING_THRESHOLD).length;
+            } catch {
+                // no issuance history yet
+            }
+
             prescribers.push({
-                prescriberId: d.entityId, name: d.name, registrationBody: d.registrationBody, active
+                prescriberId: d.entityId, name: d.name, registrationBody: d.registrationBody, active,
+                prescriptionsIssued, lowScoreCount, flagged: lowScoreCount >= FLAG_AFTER_LOW_SCORES
             });
         }
         res.json(prescribers);

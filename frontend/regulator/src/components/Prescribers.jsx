@@ -58,13 +58,21 @@ export default function Prescribers() {
         <div className="card">
           <table>
             <thead>
-              <tr><th>Name</th><th>Registration</th><th>Status</th><th></th></tr>
+              <tr><th>Name</th><th>Registration</th><th>Issued</th><th>Status</th><th></th></tr>
             </thead>
             <tbody>
               {prescribers.map((p) => (
                 <tr key={p.prescriberId}>
                   <td>{p.name}<div className="hint">{p.prescriberId}</div></td>
                   <td>{p.registrationBody}</td>
+                  <td>
+                    {p.prescriptionsIssued}
+                    {p.flagged && (
+                      <div className="badge warn" style={{ marginTop: 4 }}>
+                        {p.lowScoreCount} low-score prescriptions
+                      </div>
+                    )}
+                  </td>
                   <td>
                     {p.active === true && <span className="badge ok">Active</span>}
                     {p.active === false && <span className="badge warn">Revoked</span>}
@@ -78,7 +86,7 @@ export default function Prescribers() {
                 </tr>
               ))}
               {prescribers.length === 0 && (
-                <tr><td colSpan={4}>No registered doctors yet.</td></tr>
+                <tr><td colSpan={5}>No registered doctors yet.</td></tr>
               )}
             </tbody>
           </table>

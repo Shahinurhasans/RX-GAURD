@@ -58,6 +58,13 @@ export default function Dashboard({ session, onLogout }) {
     }
   }
 
+  function handleDecline() {
+    // No chain write here: the prescription stays ISSUED and valid, so the
+    // patient can take it to a pharmacy that actually has the drug.
+    setVerified(null);
+    setPrescriptionId('');
+  }
+
   async function handleReceipt(e) {
     e.preventDefault();
     setStockError(null);
@@ -124,21 +131,38 @@ export default function Dashboard({ session, onLogout }) {
 
         {error && <div className="error">{error}</div>}
 
-        {verified && (
-          <div className="card">
-            <div className={`badge ${verified.valid ? 'ok' : 'warn'}`}>
-              {verified.valid ? 'VALID & UNFILLED' : `NOT DISPENSABLE (${verified.status})`}
+        {verified && (() => {
+          const drugStock = stock.find((s) => s.drugCode === verified.drugCode);
+          const haveEnough = !drugStock || drugStock.expectedStock >= verified.quantity;
+          return (
+            <div className="card">
+              <div className={`badge ${verified.valid ? 'ok' : 'warn'}`}>
+                {verified.valid ? 'VALID & UNFILLED' : `NOT DISPENSABLE (${verified.status})`}
+              </div>
+              <p>Drug: <strong>{verified.drugCode.replaceAll('_', ' ')}</strong> ({verified.awareCategory})</p>
+              <p>Dose: {verified.dose} &middot; Duration: {verified.duration} &middot; Quantity: <strong>{verified.quantity}</strong></p>
+              <p>AI appropriateness score at issuance: {Math.round(verified.appropriatenessScore * 100)}%</p>
+
+              {verified.valid && !haveEnough && (
+                <div className="badge warn">
+                  Insufficient stock &mdash; you have {drugStock.expectedStock}, patient needs {verified.quantity}
+                </div>
+              )}
+
+              {verified.valid && haveEnough && (
+                <button onClick={handleDispense} disabled={loading}>
+                  {loading ? 'Dispensing…' : `Confirm ${verified.quantity} dispensed & commit to chain`}
+                </button>
+              )}
+
+              {verified.valid && !haveEnough && (
+                <div style={{ display: 'flex', gap: 10 }}>
+                  <button onClick={handleDecline}>Decline &mdash; out of stock</button>
+                </div>
+              )}
             </div>
-            <p>Drug: <strong>{verified.drugCode.replaceAll('_', ' ')}</strong> ({verified.awareCategory})</p>
-            <p>Dose: {verified.dose} &middot; Duration: {verified.duration} &middot; Quantity: <strong>{verified.quantity}</strong></p>
-            <p>AI appropriateness score at issuance: {Math.round(verified.appropriatenessScore * 100)}%</p>
-            {verified.valid && (
-              <button onClick={handleDispense} disabled={loading}>
-                {loading ? 'Dispensing…' : `Confirm ${verified.quantity} dispensed & commit to chain`}
-              </button>
-            )}
-          </div>
-        )}
+          );
+        })()}
 
         {dispensed && (
           <div className="card">

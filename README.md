@@ -114,6 +114,23 @@ The regulator console (`:5175`) has four tabs:
   and timestamp) — demonstrates that no party, including DGDA itself, can
   edit or delete a past record.
 
+The Prescribers tab also flags a doctor who has issued 3+ prescriptions
+scoring below 50% appropriateness (but above the hard floor below) — a
+pattern worth a human review even though no single one broke a rule.
+
+**AI appropriateness floor:** a prescription scoring below 40% is refused
+outright — `IssuePrescription` rejects it on-chain (the authoritative gate;
+the backend also checks first to fail fast and return the AI's suggested
+alternative without wasting a transaction). Between 40% and 50% it's
+allowed but flagged as "consider alternative"; above 50% it's a normal
+first-line accept.
+
+**Stock-aware dispensing:** the pharmacy portal cross-references a
+prescription's quantity against that pharmacy's own tracked `expectedStock`
+before offering "Confirm dispensed." If there isn't enough, it shows the
+shortfall and offers "Decline — out of stock" instead, which does not touch
+the chain — the prescription stays valid so the patient can try elsewhere.
+
 ## Known scope reductions vs. the whitepaper (documented deliberately)
 
 - **Two orgs, not seven.** The pilot network's `Org1MSP`/`Org2MSP` each carry
