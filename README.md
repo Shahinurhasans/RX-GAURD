@@ -20,7 +20,10 @@ component maps directly onto a section of the whitepaper:
 | `chaincode/rxguard` | §7.5.1–7.5.3 | Prescription issuance, dispensing verification, stock reconciliation, regulator aggregation, on a permissioned Fabric channel |
 | `ai-service/` | §7.6.1 | Trained appropriateness classifier (WHO AWaRe category + score) queried at the point of prescription |
 | `backend/` | §7.5 | Express API bridging the front-end to the Fabric Gateway and the AI service |
-| `frontend/` | §4.1–4.3 | Prescriber, pharmacist, public-verify, and regulator views |
+| `frontend/doctor` | §4.1 | Standalone prescriber portal |
+| `frontend/pharmacy` | §4.2 | Standalone pharmacy portal (verify, dispense, inventory) |
+| `frontend/regulator` | §4.3 | Standalone DGDA-style regulator console |
+| `frontend/verify` | §7.2 | Standalone public verification page (no login) |
 
 ### On-chain vs off-chain (whitepaper §7.4)
 
@@ -36,11 +39,23 @@ exactly.
 chaincode/rxguard/   Fabric contract (fabric-contract-api, Node.js)
 ai-service/          Appropriateness classifier: train.py, service.py (FastAPI)
 backend/             Express API + Fabric Gateway client
-frontend/             React app (Vite): prescriber / pharmacist / public-verify / regulator
+frontend/doctor/     Standalone Vite app — prescriber portal (port 5173)
+frontend/pharmacy/   Standalone Vite app — pharmacy portal (port 5174)
+frontend/regulator/  Standalone Vite app — regulator console (port 5175)
+frontend/verify/     Standalone Vite app — public verification, no login (port 5176)
 scripts/             Network bring-up and deployment helper scripts
 docs/                Architecture notes, sequence diagrams
 fabric-samples/      Hyperledger Fabric test-network (not our code; gitignored)
 ```
+
+Each `frontend/*` app is an independent Vite project with its own
+`package.json`, login/registration flow, and visual identity — there is no
+shared router or nav between them, matching how a doctor's clinic app, a
+pharmacy's point-of-sale integration, a government oversight console, and a
+public verification page would realistically be separate products. They
+share only the shape of a small API client (`src/api.js`) and JWT session
+helper (`src/auth.js`), duplicated per app rather than published as a shared
+package, since the four are meant to evolve independently.
 
 ## Running the prototype end-to-end
 
@@ -62,27 +77,29 @@ cd ../backend
 npm install
 npm start   # http://localhost:4000
 
-# 4. Start the front-end
-cd ../frontend
-npm install
-npm run dev   # http://localhost:5173
+# 4. Start each front-end (separate terminals/ports)
+cd ../frontend/doctor    && npm install && npm run dev   # http://localhost:5173
+cd ../frontend/pharmacy  && npm install && npm run dev   # http://localhost:5174
+cd ../frontend/regulator && npm install && npm run dev   # http://localhost:5175
+cd ../frontend/verify    && npm install && npm run dev   # http://localhost:5176
 ```
 
-Then open `http://localhost:5173`, register a doctor, pharmacy, or regulator
-account (doctor registration writes a prescriber record onto the ledger,
-whitepaper §7.5.1) and log in. `/prescriber`, `/pharmacist`, and `/regulator`
-each require the matching account type — prescriberId/pharmacyId/pharmacistId
-come from the logged-in session, not a free-text field, so a prescriber
-cannot dispense and a pharmacy cannot issue. Issue a prescription, copy the
-prescription ID (or scan the QR), and use `/pharmacist` to verify and dispense
-it, `/verify` for the patient-facing check, and `/regulator` to see the
-aggregated dispensing and stock-discrepancy view.
+Register a doctor at `:5173`, a pharmacy at `:5174`, and a regulator at
+`:5175` (doctor registration writes a prescriber record onto the ledger,
+whitepaper §7.5.1). Each app only accepts login for its own role — a doctor
+account is rejected on the pharmacy portal and vice versa — and
+prescriberId/pharmacyId/pharmacistId come from the logged-in session, never
+a free-text field. Issue a prescription on `:5173` (including a quantity —
+number of units/tablets, also written on-chain), copy the prescription ID
+(or scan the QR), and verify/dispense it on `:5174`. `:5176` is the
+patient-facing check, no login needed. `:5175` shows the aggregated
+dispensing and stock-discrepancy view across pharmacies.
 
 A pharmacy account can also log stock receipts and physical audit counts on
-`/pharmacist` — every on-chain dispense auto-decrements the pharmacy's
-expected stock, so a shortfall against what's physically counted flags
-possible sales made without a matching prescription (visible to regulators
-on `/regulator`).
+`:5174` — every on-chain dispense auto-decrements the pharmacy's expected
+stock by the prescribed quantity, so a shortfall against what's physically
+counted flags possible sales made without a matching prescription (visible
+to regulators on `:5175`).
 
 ## Known scope reductions vs. the whitepaper (documented deliberately)
 

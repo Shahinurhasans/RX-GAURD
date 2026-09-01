@@ -16,38 +16,11 @@ async function request(path, options = {}) {
 }
 
 export const api = {
-  registerDoctor: (data) =>
-    request('/api/auth/register/doctor', { method: 'POST', body: JSON.stringify(data) }),
-
-  registerPharmacy: (data) =>
-    request('/api/auth/register/pharmacy', { method: 'POST', body: JSON.stringify(data) }),
-
   registerRegulator: (data) =>
     request('/api/auth/register/regulator', { method: 'POST', body: JSON.stringify(data) }),
 
   login: (data) =>
     request('/api/auth/login', { method: 'POST', body: JSON.stringify(data) }),
-
-  issuePrescription: (data) =>
-    request('/api/prescriptions', { method: 'POST', body: JSON.stringify(data) }),
-
-  verifyPrescription: (id) =>
-    request(`/api/prescriptions/${id}/verify`),
-
-  dispensePrescription: (id, data) =>
-    request(`/api/prescriptions/${id}/dispense`, { method: 'POST', body: JSON.stringify(data) }),
-
-  getHistory: (id) =>
-    request(`/api/prescriptions/${id}/history`),
-
-  recordStockReceipt: (data) =>
-    request('/api/pharmacy/stock/receipt', { method: 'POST', body: JSON.stringify(data) }),
-
-  reportStockAudit: (data) =>
-    request('/api/pharmacy/stock/audit', { method: 'POST', body: JSON.stringify(data) }),
-
-  getOwnStock: () =>
-    request('/api/pharmacy/stock'),
 
   getPharmacies: () =>
     request('/api/regulator/pharmacies'),

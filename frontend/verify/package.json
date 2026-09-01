@@ -1,8 +1,8 @@
 {
-  "name": "rxguard-frontend",
+  "name": "rxguard-public-verify",
   "version": "1.0.0",
   "private": true,
-  "description": "Rx-Guard prescriber, pharmacist, and public verification UI",
+  "description": "Rx-Guard public verification page — standalone, no login, for patients/citizens to check a prescription's authenticity",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,9 +10,7 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0",
-    "qrcode.react": "^3.1.0"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",

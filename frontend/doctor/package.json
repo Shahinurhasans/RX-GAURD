@@ -1,0 +1,20 @@
+{
+  "name": "rxguard-doctor-portal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Rx-Guard prescriber portal — standalone app for doctors to issue prescriptions",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "qrcode.react": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.2"
+  }
+}

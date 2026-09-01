@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'rxguard_session';
+const STORAGE_KEY = 'rxguard_doctor_session';
 
 export function getSession() {
   try {
