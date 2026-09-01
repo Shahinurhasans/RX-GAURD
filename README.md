@@ -101,6 +101,19 @@ stock by the prescribed quantity, so a shortfall against what's physically
 counted flags possible sales made without a matching prescription (visible
 to regulators on `:5175`).
 
+The regulator console (`:5175`) has four tabs:
+- **Overview** — a national summary across every pharmacy: AWaRe mix,
+  total dispensing events, and pharmacies ranked by unexplained shortfall.
+- **Pharmacy Report** — the per-pharmacy dispensing + stock reconciliation
+  view (unchanged from before).
+- **Prescribers** — revoke a doctor's licence. This writes to the ledger
+  immediately; that doctor's next `IssuePrescription` attempt is rejected
+  network-wide, with no phone call or email needed to notify pharmacies.
+- **Audit Trail** — look up a prescription ID to see its full immutable
+  transaction history (issued, dispensed, each with its own transaction ID
+  and timestamp) — demonstrates that no party, including DGDA itself, can
+  edit or delete a past record.
+
 ## Known scope reductions vs. the whitepaper (documented deliberately)
 
 - **Two orgs, not seven.** The pilot network's `Org1MSP`/`Org2MSP` each carry

@@ -29,5 +29,17 @@ export const api = {
     request(`/api/regulator/pharmacies/${pharmacyId}/dispensing`),
 
   getPharmacyStock: (pharmacyId) =>
-    request(`/api/regulator/pharmacies/${pharmacyId}/stock`)
+    request(`/api/regulator/pharmacies/${pharmacyId}/stock`),
+
+  getPrescribers: () =>
+    request('/api/regulator/prescribers'),
+
+  revokePrescriber: (prescriberId, reason) =>
+    request(`/api/regulator/prescribers/${prescriberId}/revoke`, { method: 'POST', body: JSON.stringify({ reason }) }),
+
+  getPrescriptionHistory: (prescriptionId) =>
+    request(`/api/prescriptions/${prescriptionId}/history`),
+
+  getNationalSummary: () =>
+    request('/api/regulator/national-summary')
 };

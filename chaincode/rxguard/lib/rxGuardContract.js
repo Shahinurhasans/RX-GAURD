@@ -43,6 +43,15 @@ class RxGuardContract extends Contract {
         return JSON.stringify(prescriber);
     }
 
+    async GetPrescriber(ctx, prescriberId) {
+        const key = ctx.stub.createCompositeKey('PRESCRIBER', [prescriberId]);
+        const raw = await ctx.stub.getState(key);
+        if (!raw || raw.length === 0) {
+            throw new Error(`Prescriber ${prescriberId} not found`);
+        }
+        return raw.toString();
+    }
+
     async RevokePrescriber(ctx, prescriberId, reason) {
         this._requireRole(ctx, ['regulator', 'professionalBody']);
 

@@ -16,6 +16,17 @@ function decodeResult(bytes) {
     return text ? JSON.parse(text) : null;
 }
 
+// The Fabric Gateway client surfaces a generic "failed to endorse" message
+// on the thrown error and puts the actual chaincode rejection reason (e.g.
+// "Prescriber X is revoked") in a separate details array -- unwrap it so
+// API responses show the real reason instead of the generic one.
+function errorMessage(err) {
+    const detail = err?.details?.[0]?.message;
+    if (!detail) return err.message;
+    const match = detail.match(/chaincode response \d+, (.*)/);
+    return match ? match[1] : detail;
+}
+
 // --- Account registration & login -----------------------------------------
 //
 // A doctor account is backed by an on-chain prescriber record (so
@@ -39,7 +50,7 @@ app.post('/api/auth/register/doctor', async (req, res) => {
         conn = await connectAs('org1');
         await conn.contract.submitTransaction('RegisterPrescriber', prescriberId, name, registrationBody, '');
     } catch (err) {
-        return res.status(400).json({ error: `On-chain registration failed: ${err.message}` });
+        return res.status(400).json({ error: `On-chain registration failed: ${errorMessage(err)}` });
     } finally {
         conn?.close();
     }
@@ -133,7 +144,7 @@ app.post('/api/prescriptions', requireRole('doctor'), async (req, res) => {
 
         res.json({ prescription: decodeResult(result), ai });
     } catch (err) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ error: errorMessage(err) });
     } finally {
         conn?.close();
     }
@@ -148,7 +159,7 @@ app.get('/api/prescriptions/:id/verify', async (req, res) => {
         const result = await conn.contract.evaluateTransaction('VerifyPrescription', req.params.id);
         res.json(decodeResult(result));
     } catch (err) {
-        res.status(404).json({ error: err.message });
+        res.status(404).json({ error: errorMessage(err) });
     } finally {
         conn?.close();
     }
@@ -168,7 +179,7 @@ app.post('/api/prescriptions/:id/dispense', requireRole('pharmacy'), async (req,
         );
         res.json(decodeResult(result));
     } catch (err) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ error: errorMessage(err) });
     } finally {
         conn?.close();
     }
@@ -181,7 +192,7 @@ app.get('/api/prescriptions/:id/history', async (req, res) => {
         const result = await conn.contract.evaluateTransaction('GetPrescriptionHistory', req.params.id);
         res.json(decodeResult(result));
     } catch (err) {
-        res.status(404).json({ error: err.message });
+        res.status(404).json({ error: errorMessage(err) });
     } finally {
         conn?.close();
     }
@@ -204,7 +215,7 @@ app.post('/api/pharmacy/stock/receipt', requireRole('pharmacy'), async (req, res
         );
         res.json(decodeResult(result));
     } catch (err) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ error: errorMessage(err) });
     } finally {
         conn?.close();
     }
@@ -220,7 +231,7 @@ app.post('/api/pharmacy/stock/audit', requireRole('pharmacy'), async (req, res) 
         );
         res.json(decodeResult(result));
     } catch (err) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ error: errorMessage(err) });
     } finally {
         conn?.close();
     }
@@ -235,7 +246,7 @@ app.get('/api/pharmacy/stock', requireRole('pharmacy'), async (req, res) => {
         );
         res.json(decodeResult(result));
     } catch (err) {
-        res.status(404).json({ error: err.message });
+        res.status(404).json({ error: errorMessage(err) });
     } finally {
         conn?.close();
     }
@@ -257,7 +268,7 @@ app.get('/api/regulator/pharmacies/:pharmacyId/dispensing', requireRole('regulat
         );
         res.json(decodeResult(result));
     } catch (err) {
-        res.status(404).json({ error: err.message });
+        res.status(404).json({ error: errorMessage(err) });
     } finally {
         conn?.close();
     }
@@ -272,7 +283,92 @@ app.get('/api/regulator/pharmacies/:pharmacyId/stock', requireRole('regulator'),
         );
         res.json(decodeResult(result));
     } catch (err) {
-        res.status(404).json({ error: err.message });
+        res.status(404).json({ error: errorMessage(err) });
+    } finally {
+        conn?.close();
+    }
+});
+
+// --- Prescriber oversight: revoke a licence network-wide (whitepaper 7.5.1) -
+
+app.get('/api/regulator/prescribers', requireRole('regulator'), async (req, res) => {
+    const doctors = listByRole('doctor');
+    let conn;
+    try {
+        conn = await connectAs('org1');
+        const prescribers = [];
+        for (const d of doctors) {
+            let active = null;
+            try {
+                const raw = await conn.contract.evaluateTransaction('GetPrescriber', d.entityId);
+                active = decodeResult(raw).active;
+            } catch {
+                active = null; // on-chain record missing/unreadable; surface as unknown rather than failing the list
+            }
+            prescribers.push({
+                prescriberId: d.entityId, name: d.name, registrationBody: d.registrationBody, active
+            });
+        }
+        res.json(prescribers);
+    } catch (err) {
+        res.status(400).json({ error: errorMessage(err) });
+    } finally {
+        conn?.close();
+    }
+});
+
+app.post('/api/regulator/prescribers/:prescriberId/revoke', requireRole('regulator'), async (req, res) => {
+    const { reason } = req.body;
+    let conn;
+    try {
+        conn = await connectAs('org1');
+        const result = await conn.contract.submitTransaction(
+            'RevokePrescriber', req.params.prescriberId, reason || 'Revoked by regulator'
+        );
+        res.json(decodeResult(result));
+    } catch (err) {
+        res.status(400).json({ error: errorMessage(err) });
+    } finally {
+        conn?.close();
+    }
+});
+
+// --- National summary across all pharmacies (whitepaper 7.5.3) ------------
+
+app.get('/api/regulator/national-summary', requireRole('regulator'), async (req, res) => {
+    const pharmacies = listByRole('pharmacy');
+    let conn;
+    try {
+        conn = await connectAs('org1');
+
+        let totalDispensingEvents = 0;
+        const awareCounts = { ACCESS: 0, WATCH: 0, RESERVE: 0 };
+        const pharmacyReports = [];
+
+        for (const p of pharmacies) {
+            const eventsRaw = await conn.contract.evaluateTransaction('GetDispensingEventsForPharmacy', p.pharmacyId);
+            const events = decodeResult(eventsRaw) || [];
+            totalDispensingEvents += events.length;
+            for (const e of events) {
+                if (awareCounts[e.awareCategory] !== undefined) awareCounts[e.awareCategory] += 1;
+            }
+
+            const stockRaw = await conn.contract.evaluateTransaction('GetStockStatusForPharmacy', p.pharmacyId);
+            const stock = decodeResult(stockRaw) || [];
+            const totalDiscrepancy = stock.reduce((sum, s) => sum + Math.max(s.discrepancy || 0, 0), 0);
+            const flaggedDrugs = stock.filter((s) => s.discrepancy > 0).length;
+
+            pharmacyReports.push({
+                pharmacyId: p.pharmacyId, name: p.name,
+                dispensingEvents: events.length, totalDiscrepancy, flaggedDrugs
+            });
+        }
+
+        pharmacyReports.sort((a, b) => b.totalDiscrepancy - a.totalDiscrepancy);
+
+        res.json({ pharmacyCount: pharmacies.length, totalDispensingEvents, awareCounts, pharmacyReports });
+    } catch (err) {
+        res.status(400).json({ error: errorMessage(err) });
     } finally {
         conn?.close();
     }
