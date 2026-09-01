@@ -71,6 +71,37 @@ disk), so this is an annoyance, not data loss — but the network appears
 **Fix**: keep one long-lived WSL session open (e.g. `wsl -d Ubuntu -- sleep
 3600` in a terminal you leave running) while developing or demoing.
 
+## Problem 5: the orderer panics on its own hostname lookup
+
+The stock `compose-test-net.yaml` sets
+`ORDERER_OPERATIONS_LISTENADDRESS=orderer.example.com:9443` — the orderer
+resolves its *own container name* via Docker's embedded DNS (`127.0.0.11`)
+just to bind its metrics/health listener. Right after the WSL2 docker daemon
+(re)starts — which happens every time the VM was suspended and you bring
+containers back with `docker start` — there's a window where that lookup can
+fail before the embedded DNS has finished registering the container's own
+record, and the orderer **panics and exits** instead of retrying:
+
+```
+PANI failed to start operations subsystem: listen tcp: lookup orderer.example.com
+     on 10.255.255.254:53: dial udp 10.255.255.254:53: connect: network is unreachable
+```
+
+Symptom from the app side: every write (`IssuePrescription`,
+`DispensePrescription`) fails with `10 ABORTED: failed to endorse
+transaction` or `14 UNAVAILABLE: no orderers could successfully process
+transaction`, while reads (`VerifyPrescription`) still work — because reads
+don't need the orderer.
+
+**Fix**: `scripts/wsl-network-up.sh` patches this to `0.0.0.0:9443` on every
+fresh bring-up, so it doesn't affect a network started that way. If you hit
+this on an **already-running** network (peers/CAs up, orderer missing or
+exited), run `bash ~/wsl-fix-orderer.sh` (copy
+`scripts/wsl-fix-orderer.sh` into WSL first) — it patches the compose file,
+recreates just the orderer container against its existing ledger volume (no
+data lost), and restarts the peers so they drop their stale connection to the
+old orderer and reconnect cleanly.
+
 ## The actual working sequence
 
 ```powershell
