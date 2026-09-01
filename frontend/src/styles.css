@@ -43,6 +43,16 @@ body {
 
 .app-header nav a.active { background: var(--primary); color: white; border-color: var(--primary); }
 
+.session { display: flex; align-items: center; gap: 10px; }
+
+.session button {
+  padding: 6px 12px;
+  font-size: 13px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
 .card {
   background: var(--card);
   border: 1px solid var(--border);

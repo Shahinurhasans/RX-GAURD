@@ -9,9 +9,11 @@
     "dev": "node --watch src/server.js"
   },
   "dependencies": {
-    "@hyperledger/fabric-gateway": "^1.5.1",
     "@grpc/grpc-js": "^1.10.9",
+    "@hyperledger/fabric-gateway": "^1.5.1",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.3"
   }
 }

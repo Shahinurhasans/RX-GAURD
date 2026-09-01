@@ -3,6 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const { connectAs } = require('./fabric/connect');
+const { slugify, issueToken, requireRole, findByEmail, insert, bcrypt } = require('./auth');
 
 const app = express();
 app.use(cors());
@@ -15,30 +16,72 @@ function decodeResult(bytes) {
     return text ? JSON.parse(text) : null;
 }
 
-// --- Prescriber onboarding -----------------------------------------------
+// --- Account registration & login -----------------------------------------
+//
+// A doctor account is backed by an on-chain prescriber record (so
+// IssuePrescription's _requireRole/prescriber-registry checks recognise
+// them); a pharmacy account is backed only by this off-chain directory,
+// since dispensing authorization is already enforced by Fabric MSP
+// membership (PharmacyOrgMSP) rather than a per-pharmacy ledger entry.
 
-app.post('/api/prescribers', async (req, res) => {
-    const { prescriberId, name, registrationBody, publicKeyPem } = req.body;
+app.post('/api/auth/register/doctor', async (req, res) => {
+    const { name, email, password, registrationBody } = req.body;
+    if (!name || !email || !password || !registrationBody) {
+        return res.status(400).json({ error: 'name, email, password, and registrationBody are required' });
+    }
+    if (findByEmail(email)) {
+        return res.status(409).json({ error: 'An account with this email already exists' });
+    }
+
+    const prescriberId = slugify('prescriber', name);
     let conn;
     try {
         conn = await connectAs('org1');
-        const result = await conn.contract.submitTransaction(
-            'RegisterPrescriber', prescriberId, name, registrationBody, publicKeyPem || ''
-        );
-        res.json(decodeResult(result));
+        await conn.contract.submitTransaction('RegisterPrescriber', prescriberId, name, registrationBody, '');
     } catch (err) {
-        res.status(400).json({ error: err.message });
+        return res.status(400).json({ error: `On-chain registration failed: ${err.message}` });
     } finally {
         conn?.close();
     }
+
+    const user = insert({
+        role: 'doctor', email, passwordHash: bcrypt.hashSync(password, 10),
+        entityId: prescriberId, name, registrationBody
+    });
+    res.json({ token: issueToken(user), role: 'doctor', entityId: prescriberId, name });
+});
+
+app.post('/api/auth/register/pharmacy', (req, res) => {
+    const { name, email, password, licenseNumber } = req.body;
+    if (!name || !email || !password || !licenseNumber) {
+        return res.status(400).json({ error: 'name, email, password, and licenseNumber are required' });
+    }
+    if (findByEmail(email)) {
+        return res.status(409).json({ error: 'An account with this email already exists' });
+    }
+
+    const pharmacyId = slugify('pharmacy', name);
+    const user = insert({
+        role: 'pharmacy', email, passwordHash: bcrypt.hashSync(password, 10),
+        entityId: pharmacyId, pharmacyId, name, licenseNumber
+    });
+    res.json({ token: issueToken(user), role: 'pharmacy', entityId: pharmacyId, name });
+});
+
+app.post('/api/auth/login', (req, res) => {
+    const { email, password } = req.body;
+    const user = findByEmail(email || '');
+    if (!user || !bcrypt.compareSync(password || '', user.passwordHash)) {
+        return res.status(401).json({ error: 'Invalid email or password' });
+    }
+    res.json({ token: issueToken(user), role: user.role, entityId: user.entityId, name: user.name });
 });
 
 // --- Prescription issuance (whitepaper 7.5.1) -----------------------------
 
-app.post('/api/prescriptions', async (req, res) => {
-    const {
-        prescriptionId, patientHash, diagnosis, drugCode, dose, duration, prescriberId
-    } = req.body;
+app.post('/api/prescriptions', requireRole('doctor'), async (req, res) => {
+    const { prescriptionId, patientHash, diagnosis, drugCode, dose, duration } = req.body;
+    const prescriberId = req.user.entityId;
 
     let conn;
     try {
@@ -93,8 +136,10 @@ app.get('/api/prescriptions/:id/verify', async (req, res) => {
     }
 });
 
-app.post('/api/prescriptions/:id/dispense', async (req, res) => {
-    const { pharmacyId, pharmacistId, dispensedDrugCode } = req.body;
+app.post('/api/prescriptions/:id/dispense', requireRole('pharmacy'), async (req, res) => {
+    const { dispensedDrugCode } = req.body;
+    const pharmacyId = req.user.pharmacyId;
+    const pharmacistId = req.user.entityId;
     let conn;
     try {
         conn = await connectAs('org2');

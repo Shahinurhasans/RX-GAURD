@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { api } from '../api.js';
+import { getSession } from '../auth.js';
 
 export default function PharmacistView() {
+  const session = getSession();
   const [prescriptionId, setPrescriptionId] = useState('');
-  const [pharmacyId, setPharmacyId] = useState('pharmacy-dhanmondi-01');
-  const [pharmacistId, setPharmacistId] = useState('pharmacist-001');
   const [verified, setVerified] = useState(null);
   const [dispensed, setDispensed] = useState(null);
   const [error, setError] = useState(null);
@@ -31,7 +31,7 @@ export default function PharmacistView() {
     setLoading(true);
     try {
       const res = await api.dispensePrescription(prescriptionId.trim(), {
-        pharmacyId, pharmacistId, dispensedDrugCode: verified.drugCode
+        dispensedDrugCode: verified.drugCode
       });
       setDispensed(res);
       setVerified({ ...verified, status: res.status, valid: false });
@@ -46,6 +46,7 @@ export default function PharmacistView() {
     <section>
       <h2>Pharmacist &mdash; Verify & Dispense</h2>
       <p className="hint">
+        Dispensing as <strong>{session?.name}</strong> (<code>{session?.entityId}</code>).
         Scan the QR (or paste the prescription ID) to query the chain for state,
         drug, dose and duration before handing over medicine (&sect;7.5.2).
       </p>
@@ -59,14 +60,6 @@ export default function PharmacistView() {
             placeholder="rx-..."
             required
           />
-        </label>
-        <label>
-          Pharmacy ID
-          <input value={pharmacyId} onChange={(e) => setPharmacyId(e.target.value)} required />
-        </label>
-        <label>
-          Pharmacist ID
-          <input value={pharmacistId} onChange={(e) => setPharmacistId(e.target.value)} required />
         </label>
         <button type="submit" disabled={loading}>Verify on chain</button>
       </form>

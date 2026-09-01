@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { api } from '../api.js';
+import { getSession } from '../auth.js';
 
 const DIAGNOSES = [
   'uti_uncomplicated', 'uti_complicated', 'typhoid', 'neonatal_sepsis',
@@ -19,8 +20,8 @@ function newId(prefix) {
 }
 
 export default function PrescriberView() {
+  const session = getSession();
   const [form, setForm] = useState({
-    prescriberId: 'prescriber-001',
     patientHash: '',
     diagnosis: DIAGNOSES[0],
     drugCode: DRUGS[0],
@@ -33,27 +34,12 @@ export default function PrescriberView() {
 
   const update = (field) => (e) => setForm({ ...form, [field]: e.target.value });
 
-  async function handleRegisterPrescriber() {
-    setError(null);
-    try {
-      await api.registerPrescriber({
-        prescriberId: form.prescriberId,
-        name: 'Dr. Demo Prescriber',
-        registrationBody: 'BMDC'
-      });
-    } catch (err) {
-      // registration is idempotent-ish for the demo; ignore "already registered"
-      if (!/already registered/i.test(err.message)) setError(err.message);
-    }
-  }
-
   async function handleSubmit(e) {
     e.preventDefault();
     setError(null);
     setResult(null);
     setLoading(true);
     try {
-      await handleRegisterPrescriber();
       const prescriptionId = newId('rx');
       const patientHash = form.patientHash || newId('patient-hash');
       const res = await api.issuePrescription({
@@ -62,8 +48,7 @@ export default function PrescriberView() {
         diagnosis: form.diagnosis,
         drugCode: form.drugCode,
         dose: form.dose,
-        duration: form.duration,
-        prescriberId: form.prescriberId
+        duration: form.duration
       });
       setResult(res);
     } catch (err) {
@@ -77,16 +62,13 @@ export default function PrescriberView() {
     <section>
       <h2>Prescriber &mdash; Issue Prescription</h2>
       <p className="hint">
+        Issuing as <strong>{session?.name}</strong> (<code>{session?.entityId}</code>).
         No patient name is sent to the chain &mdash; only a hash and clinical attributes
         (whitepaper &sect;3.2). The AI appropriateness service is queried before the
         prescription is committed (&sect;7.5.1).
       </p>
 
       <form onSubmit={handleSubmit} className="card">
-        <label>
-          Prescriber ID
-          <input value={form.prescriberId} onChange={update('prescriberId')} required />
-        </label>
         <label>
           Patient reference hash (leave blank to auto-generate)
           <input value={form.patientHash} onChange={update('patientHash')} placeholder="auto" />

@@ -8,3 +8,4 @@ __pycache__/
 install-fabric.sh
 install-fabric-wsl.sh
 ai-service/model/
+backend/data/

@@ -68,10 +68,14 @@ npm install
 npm run dev   # http://localhost:5173
 ```
 
-Then open `http://localhost:5173/prescriber`, issue a prescription, copy the
-prescription ID (or scan the QR), and use `/pharmacist` to verify and dispense
-it, `/verify` for the patient-facing check, and `/regulator` to see the
-aggregated dispensing view.
+Then open `http://localhost:5173`, register a doctor account (this writes a
+prescriber record onto the ledger, whitepaper §7.5.1) or a pharmacy account,
+and log in. `/prescriber` and `/pharmacist` require the matching account type
+— prescriberId/pharmacyId/pharmacistId come from the logged-in session, not a
+free-text field, so a prescriber cannot dispense and a pharmacy cannot issue.
+Issue a prescription, copy the prescription ID (or scan the QR), and use
+`/pharmacist` to verify and dispense it, `/verify` for the patient-facing
+check, and `/regulator` to see the aggregated dispensing view.
 
 ## Known scope reductions vs. the whitepaper (documented deliberately)
 
@@ -80,6 +84,14 @@ aggregated dispensing view.
   `chaincode/rxguard/lib/rxGuardContract.js`) so the demo runs on Fabric's
   stock two-org test-network. Production onboarding maps roles to BMDC/DGDA
   issued certificate attributes instead of org membership.
+- **Pharmacy accounts are an off-chain directory, not a ledger record.** Doctor
+  accounts map 1:1 onto an on-chain `RegisterPrescriber` entry, so a revoked
+  prescriber loses issuance rights network-wide. Pharmacy accounts exist only
+  in the backend's local user store (`backend/data/users.json`) — the actual
+  dispensing authorization is enforced by Fabric organisation membership
+  (PharmacyOrgMSP), and this store just gives counter staff a login and ties
+  dispensing events to a stable pharmacy identity. A production version would
+  register pharmacies on-chain too, with per-pharmacist granularity.
 - **Signatures are placeholders.** `prescriberSignature` / `pharmacistSignature`
   fields are populated with a deterministic string, not a real detached
   ECDSA signature from a mobile-held key, for time reasons — the chaincode's
