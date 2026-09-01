@@ -7,3 +7,4 @@ __pycache__/
 *.log
 install-fabric.sh
 install-fabric-wsl.sh
+ai-service/model/

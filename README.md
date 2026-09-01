@@ -54,7 +54,7 @@ WSL2, see `docs/WINDOWS_SETUP.md`), Node.js 18+, Python 3.10+.
 # 2. Train (or retrain) the AI appropriateness model and start the service
 cd ai-service
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
-python generate_data.py && python train.py
+python generate_data.py && python finetune_biobert.py
 uvicorn service:app --port 8001 &
 
 # 3. Start the backend API (talks to Fabric + the AI service)
@@ -89,7 +89,7 @@ aggregated dispensing view.
   directly rather than through a Polygon mirror with a merkle proof (§7.2);
   the response shape (boolean + category only) mimics what the mirror would
   expose.
-- **AI model is a small decision tree over a synthetic dataset**, not the
-  transformer described in §7.6.1 — see `ai-service/README.md` for what a
-  production version would require (ICDDR,B-labelled data, model registry,
+- **AI model is PubMedBERT fine-tuned on a synthetic dataset**, not the
+  ICDDR,B-labelled clinical data described in §7.6.1 — see `ai-service/README.md`
+  for what a production version would require (real labelled data, model registry,
   federated aggregation per §7.7).
